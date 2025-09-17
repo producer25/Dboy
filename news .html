@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afrika Football Times</title>
+    <style>
+        :root {
+            --primary-color: #FFA500;
+            --secondary-color: #008000;
+            --dark-color: #1A1A1A;
+            --light-color: #F5F5F5;
+            --accent-color: #FF4500;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+        
+        nav ul li a:hover {
+            border-bottom: 2px solid white;
+        }
+        
+        .language-selector {
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-selector select {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: none;
+            background-color: white;
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: flex-end;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            color: white;
+            width: 100%;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #e03c00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .main-news {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .news-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 1.5rem;
+        }
+        
+        .news-category {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .news-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+        }
+        
+        .news-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .featured-leagues {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .leagues-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding-bottom: 1rem;
+            scrollbar-width: thin;
+        }
+        
+        .league-card {
+            min-width: 200px;
+            background-color: #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .league-card:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+        
+        .league-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+        
+        .league-card h3 {
+            font-size: 1.1rem;
+        }
+        
+        .video-highlights {
+            padding: 3rem 0;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .video-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 69, 0, 0.8);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .play-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .video-info {
+            padding: 1rem;
+            background-color: white;
+        }
+        
+        .video-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .video-meta {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero {
+                height: 50vh;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                height: 40vh;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1rem;
+            }
+            
+            .news-grid, .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://via.placeholder.com/50x50" alt="Afrika Football Times Logo">
+                <span>Afrika Football Times</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Nyumbani</a></li>
+                    <li><a href="#">Habari</a></li>
+                    <li><a href="#">Ligi</a></li>
+                    <li><a href="#">Michezo</a></li>
+                    <li><a href="#">Takwimu</a></li>
+                    <li><a href="#">Kuhusu Sisi</a></li>
+                </ul>
+            </nav>
+            <div class="language-selector">
+                <select id="language-selector">
+                    <option value="sw">Kiswahili</option>
+                    <option value="en">English</option>
+                    <option value="fr">Français</option>
+                    <option value="ar">العربية</option>
+                    <option value="pt">Português</option>
+                    <option value="yo">Yorùbá</option>
+                    <option value="ha">Hausa</option>
+                    <option value="zu">Zulu</option>
+                    <option value="am">አማርኛ</option>
+                </select>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="slide-up">Habari Zaidi Kuhusu Kombe la Afrika 2023</h1>
+            <p class="slide-up">Pata habari za hivi punde, ripoti, na uchambuzi wa kina kuhusu soka la Afrika.</p>
+            <a href="#" class="btn slide-up">Soma Zaidi</a>
+        </div>
+    </section>
+    
+    <section class="main-news container">
+        <h2 class="section-title fade-in">Habari Za Hivi Punde</h2>
+        <div class="news-grid">
+            <article class="news-card fade-in">
+                <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Timu ya Taifa ya Algeria">
+                <div class="news-content">
+                    <span class="news-category">Kombe la Afrika</span>
+                    <h3 class="news-title">Algeria Yaanza Ulinzi wa Kombe Kwa Kufunga Mali</h3>
+                    <p class="news-excerpt">Timu ya taifa ya Algeria imeanza ulinzi wa kombe la Afrika kwa ushindi wa 2-1 dhidi ya Mali katika mchezo wa kwanza wa kundi lao.</p>
+                    <div class="news-meta">
+                        <span>Imeandikwa na John Doe</span>
+                        <span>Aprili 15, 2023</span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card fade-in">
+                <img src="https://images.unsplash.com/photo-1508098682722-e99c47a06b43?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Sadio Mane">
+                <div class="news-content">
+                    <span class="news-category">Uhamiaji</span>
+                    <h3 class="news-title">Sadio Mane Ahamia Bayern Munich</h3>
+                    <p class="news-excerpt">Nyota wa Senegal, Sadio Mane, amesaini mkataba na Bayern Munich baada ya kuacha Liverpool kwa ada ya takriban milioni 35.</p>
+                    <div class="news-meta">
+                        <span>Imeandikwa na Jane Smith</span>
+                        <span>Aprili 14, 2023</span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card fade-in">
+                <img src="https://images.unsplash.com/photo-1579952363878-3d3d5bf56092?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Stadi ya Soka">
+                <div class="news-content">
+                    <span class="news-category">Michezo</span>
+                    <h3 class="news-title">Stadi Mpya ya Soka Ifunguliwa Nigeria</h3>
+                    <p class="news-excerpt">Nigeria imefungua stadi mpya ya kimataifa ya soka yenye uwezo wa kuchukua watazamaji 50,000 katika mji mkuu wa Abuja.</p>
+                    <div class="news-meta">
+                        <span>Imeandikwa na Ahmed Musa</span>
+                        <span>Aprili 13, 2023</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <section class="featured-leagues">
+        <div class="container">
+            <h2 class="section-title fade-in" style="color: white;">Ligi Maarufu za Afrika</h2>
+            <div class="leagues-container">
+                <div class="league-card slide-up">
+                    <img src="https://via.placeholder.com/80x80" alt="Ligi Kuu Tanzania">
+                    <h3>Ligi Kuu Tanzania</h3>
+                </div>
+                <div class="league-card slide-up">
+                    <img src="https://via.placeholder.com/80x80" alt="Premier League ya Nigeria">
+                    <h3>NPFL Nigeria</h3>
+                </div>
+                <div class="league-card slide-up">
+                    <img src="https://via.placeholder.com/80x80" alt="Ligi ya Morocco">
+                    <h3>Botola Pro</h3>
+                </div>
+                <div class="league-card slide-up">
+                    <img src="https://via.placeholder.com/80x80" alt="Ligi ya Misri">
+                    <h3>Egyptian Premier League</h3>
+                </div>
+                <div class="league-card slide-up">
+                    <img src="https://via.placeholder.com/80x80" alt="Ligi ya Afrika Kusini">
+                    <h3>PSL Afrika Kusini</h3>
+                </div>
+                <div class="league-card slide-up">
+                    <img src="https://via.placeholder.com/80x80" alt="Ligi ya Algeria">
+                    <h3>Algerian Ligue 1</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="video-highlights container">
+        <h2 class="section-title fade-in">Video Zaidi</h2>
+        <div class="video-grid">
+            <div class="video-card fade-in">
+                <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Mabao ya Senegal">
+                <div class="play-icon">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Mabao 5 Bora ya Senegal Kombe la Afrika</h3>
+                    <div class="video-meta">
+                        <span>2,345,678 views</span>
+                        <span>•</span>
+                        <span>2 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-card fade-in">
+                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Mafunzo ya Timu">
+                <div class="play-icon">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Jinsi Algeria Ilivyotayarisha Kombe la Afrika</h3>
+                    <div class="video-meta">
+                        <span>1,234,567 views</span>
+                        <span>•</span>
+                        <span>1 month ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-card fade-in">
+                <img src="https://images.unsplash.com/photo-1543357480-c60d400e2ef9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Mchezaji wa Morocco">
+                <div class="play-icon">
+                    <i class="fas fa-play"></i>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">Hakim Ziyech - Mchezo Bora wa Morocco</h3>
+                    <div class="video-meta">
+                        <span>987,654 views</span>
+                        <span>•</span>
+                        <span>3 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Kuhusu Sisi</h3>
+                    <p>Afrika Football Times ni chanzo kikuu cha habari za soka barani Afrika, tukitoa habari za hivi punde, uchambuzi na ripoti za kina.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Menyu</h3>
+                    <ul>
+                        <li><a href="#">Nyumbani</a></li>
+                        <li><a href="#">Habari</a></li>
+                        <li><a href="#">Ligi</a></li>
+                        <li><a href="#">Michezo</a></li>
+                        <li><a href="#">Takwimu</a></li>
+                        <li><a href="#">Wasiliana Nasi</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Ligi</h3>
+                    <ul>
+                        <li><a href="#">Ligi Kuu Tanzania</a></li>
+                        <li><a href="#">Premier League ya Nigeria</a></li>
+                        <li><a href="#">Ligi ya Morocco</a></li>
+                        <li><a href="#">Ligi ya Misri</a></li>
+                        <li><a href="#">Ligi ya Afrika Kusini</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Wasiliana Nasi</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@afrikafootballtimes.com</li>
+                        <li><i class="fas fa-phone"></i> +255 123 456 789</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Dar es Salaam, Tanzania</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Afrika Football Times. Haki zote zimehifadhiwa.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Language selector functionality
+        document.getElementById('language-selector').addEventListener('change', function() {
+            const selectedLanguage = this.value;
+            // In a real implementation, this would redirect to the selected language version
+            // or load translations via AJAX
+            alert(`Language changed to ${this.options[this.selectedIndex].text}. In a real site, this would load the ${selectedLanguage} version.`);
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fade-in, .slide-up');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.fade-in, .slide-up').forEach(element => {
+            element.style.opacity = '0';
+            if (element.classList.contains('slide-up')) {
+                element.style.transform = 'translateY(30px)';
+            }
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
